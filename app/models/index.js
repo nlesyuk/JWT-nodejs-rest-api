@@ -26,6 +26,7 @@ db.role = require("../models/role.model.js")(sequelize, Sequelize);
 // The association between Users and Roles is Many-to-Many
 // – One User can have several Roles.
 // – One Role can be taken on by many Users.
+db.refreshToken = require("../models/refreshToken.model.js")(sequelize, Sequelize);
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
@@ -35,6 +36,12 @@ db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
   otherKey: "roleId"
+});
+db.refreshToken.belongsTo(db.user, {
+  foreignKey: 'userId', targetKey: 'id'
+});
+db.user.hasOne(db.refreshToken, {
+  foreignKey: 'userId', targetKey: 'id'
 });
 
 db.ROLES = ["user", "admin", "moderator"];

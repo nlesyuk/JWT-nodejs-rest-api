@@ -1,5 +1,5 @@
 # JWT NodeJS ExpressJS
-
+## Parts
 [Access token](https://www.bezkoder.com/node-js-jwt-authentication-postgresql/)
 [Refresh token](https://bezkoder.com/jwt-refresh-token-node-js/)
 
@@ -24,15 +24,9 @@ Or only in x-access-token header:
 *pg for PostgreSQL and pg-hstore for converting data into the PostgreSQL hstore format.
 
 
-
-
-
-
-
-
-
 # test
 
+// signup http://localhost:8080/api/auth/signup
 {
     "username": "test",
     "email": "test@gmail.com",
@@ -40,11 +34,13 @@ Or only in x-access-token header:
     "roles": ["user"]
 }
 
+// signin http://localhost:8080/api/auth/signin
 {
     "username": "test",
     "password": "123",
 }
 
+// signin response
 {
   "id": 1,
   "username": "test",
@@ -52,5 +48,6 @@ Or only in x-access-token header:
   "roles": [
     "ROLE_USER"
   ],
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjU4MTY3NTI1LCJleHAiOjE2NTgyNTM5MjV9.PSQSLdT3bNauZLv2feNiBzC25R9syRr5YeulQ6PoVZU"
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjU5MTI1MjYwLCJleHAiOjE2NTkyMTE2NjB9.mgaaXq9446iB_A_VbpvYsDfqUNrKYMANqVnP4BfKO5A",
+  "refreshToken": "147b9c51-a8b9-4f81-b2e0-ac7a6eed9f4c"
 }
