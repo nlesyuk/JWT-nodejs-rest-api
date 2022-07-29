@@ -1,11 +1,13 @@
-# JWT NodeJS ExpressJS
+# JWT NodeJS ExpressJS Authentitication
 ## Parts
 [Access token](https://www.bezkoder.com/node-js-jwt-authentication-postgresql/)
 [Refresh token](https://bezkoder.com/jwt-refresh-token-node-js/)
 
-The Client typically attaches JWT in Authorization header with Bearer prefix:
+
+[-] The Client typically attaches JWT in Authorization header with Bearer prefix:
 `Authorization: Bearer [header].[payload].[signature]`
-Or only in x-access-token header:
+
+[+] Or only in x-access-token header:
 `x-access-token: [header].[payload].[signature]`
 
 
@@ -20,11 +22,11 @@ Or only in x-access-token header:
 
 
 
-# PG (postgres)
+## PG (postgres)
 *pg for PostgreSQL and pg-hstore for converting data into the PostgreSQL hstore format.
 
 
-# test
+## test data
 
 // signup http://localhost:8080/api/auth/signup
 {
