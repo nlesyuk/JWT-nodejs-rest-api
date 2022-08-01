@@ -5,36 +5,41 @@ const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-exports.signup = (req, res) => {
-  // Save User to Database
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
-  })
-    .then(user => {
-      if (req.body.roles) {
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
-          user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
-          });
-        });
-      } else {
-        // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
-        });
-      }
+exports.signup = async (req, res) => {
+  const successMessage = "User was registered successfully!"
+  const { username, email, password, roles } = req.body
+  const userRole = [1] // 'user' role is 1
+
+  try {
+    // Save User to Database
+    const user = await User.create({
+      username: username,
+      email: email,
+      password: bcrypt.hashSync(password, 8)
     })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
+
+    if (roles) {
+      const userRoles = await Role.findAll({
+        where: {
+          name: {
+            [Op.or]: roles
+          }
+        }
+      })
+      console.log('userRoles', userRoles)
+      await user.setRoles(userRoles)
+      res.send({ message: successMessage });
+      return
+    }
+
+
+    await user.setRoles(userRole)
+    res.send({ message: successMessage });
+    return
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+    return
+  }
 };
 
 exports.signin = async (req, res) => {

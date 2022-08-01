@@ -3,7 +3,7 @@
 [Access token](https://www.bezkoder.com/node-js-jwt-authentication-postgresql/)
 [Refresh token](https://bezkoder.com/jwt-refresh-token-node-js/)
 
-
+## Choose prefer header
 [-] The Client typically attaches JWT in Authorization header with Bearer prefix:
 `Authorization: Bearer [header].[payload].[signature]`
 
@@ -11,6 +11,7 @@
 `x-access-token: [header].[payload].[signature]`
 
 
+## Endpoints table
 | Methods | Urls             | Actions                    |
 | ------- | ---------------- | -------------------------- |
 | POST    | /api/auth/signup | signup new account         |
@@ -22,8 +23,14 @@
 
 
 
-## PG (postgres)
+## Database: PG (postgres)
 *pg for PostgreSQL and pg-hstore for converting data into the PostgreSQL hstore format.
+### Roles table
+| id  | name      | createdAt                  | updatedAt                  |
+| --- | --------- | -------------------------- | -------------------------- |
+| 1   | user      | 2022-08-01 12:31:48.278+03 | 2022-08-01 12:31:48.278+03 |
+| 2   | moderator | 2022-08-01 12:31:48.279+03 | 2022-08-01 12:31:48.279+03 |
+| 3   | admin     | 2022-08-01 12:31:48.279+03 | 2022-08-01 12:31:48.279+03 |
 
 
 ## test data
