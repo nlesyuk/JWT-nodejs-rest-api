@@ -89,16 +89,14 @@ exports.signin = async (req, res) => {
 };
 
 exports.refreshToken = async (req, res) => {
-  const { refreshToken: requestToken } = req.body;
-  console.log('requestToken', requestToken)
-
-  if (requestToken == null) {
-    return res.status(403).json({ message: "Refresh Token is required!" });
-  }
-
   try {
+    const { refreshToken: requestToken } = req.body;
+
+    if (requestToken == null) {
+      return res.status(403).json({ message: "Refresh Token is required!" });
+    }
+
     let refreshToken = await RefreshToken.findOne({ where: { token: requestToken } });
-    console.log(refreshToken)
 
     if (!refreshToken) {
       res.status(403).json({ message: "Refresh token is not in database!" });
@@ -121,10 +119,6 @@ exports.refreshToken = async (req, res) => {
       { expiresIn: config.jwtExpiration, }
     );
 
-    console.log('refreshToken>>>>', {
-      accessToken: newAccessToken,
-      refreshToken: refreshToken.token,
-    })
     return res.status(200).json({
       accessToken: newAccessToken,
       refreshToken: refreshToken.token,
